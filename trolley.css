@@ -1,0 +1,456 @@
+/* Section 4 — classic horizontal trolley problem */
+.section-trolley {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.section-trolley.hidden {
+  display: none !important;
+}
+
+.section-trolley:not(.hidden) {
+  display: flex;
+}
+
+.trolley-panel {
+  width: 100%;
+  max-width: 480px;
+  padding: 0 12px 20px;
+}
+
+.trolley-title {
+  margin: 0 0 6px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.trolley-hint {
+  margin: 0 0 12px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #5f6368;
+  line-height: 1.4;
+}
+
+/* viewBox 0 0 400 200 — all % = coord / 400 or / 200 */
+.trolley-scene {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  aspect-ratio: 2 / 1;
+  background-color: #6eb5d8;
+  background-image:
+    linear-gradient(180deg, #87ceeb 0%, #b4dce8 38%, transparent 38%),
+    url("sprites/grass-texture.svg"),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 11px,
+      rgba(27, 94, 32, 0.06) 11px,
+      rgba(27, 94, 32, 0.06) 12px
+    ),
+    linear-gradient(180deg, transparent 38%, #4a9e4a 38%, #3d8b3d 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size:
+    100% 100%,
+    64px 64px,
+    100% 100%;
+  background-position: top, bottom, bottom;
+  border: 3px solid #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.trolley-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.trolley-ground {
+  fill: transparent;
+}
+
+.trolley-rail {
+  stroke: #212121;
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trolley-rail-inner {
+  stroke: #757575;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trolley-tie {
+  stroke: #5d4037;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.trolley-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.trolley-layer--interactive {
+  pointer-events: none;
+}
+
+.trolley-layer--interactive .trolley-lever-assembly {
+  pointer-events: auto;
+}
+
+/* Fork switch at (195, 72) */
+.trolley-switch {
+  position: absolute;
+  left: 48.75%;
+  top: 36%;
+  width: 6%;
+  height: 2.5%;
+  margin-top: -1.25%;
+  background: #616161;
+  border: 2px solid #1a1a1a;
+  transform-origin: 0% 50%;
+  transform: rotate(-38deg);
+  transition: transform 0.08s ease-out;
+  z-index: 4;
+}
+
+.trolley-scene.is-lever-dragging .trolley-switch {
+  transition: none;
+}
+
+.trolley-scene.is-robot-committed .trolley-lever-arm {
+  cursor: not-allowed;
+}
+
+.trolley-scene.is-robot-committed .trolley-lever-knob {
+  box-shadow: inset -2px -2px 0 rgba(255, 100, 100, 0.35);
+}
+
+/* Train — pixel sprite, faces RIGHT (→) */
+.trolley-train-wrap {
+  position: absolute;
+  width: 28%;
+  height: 22%;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.trolley-scene.is-resolved .trolley-train-wrap {
+  transition: left 0.12s linear, top 0.12s linear;
+}
+
+.trolley-train-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.trolley-sprite {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.35));
+}
+
+.trolley-train-smoke {
+  position: absolute;
+  left: -12%;
+  top: 8%;
+  width: 20%;
+  height: 20%;
+  background: rgba(70, 70, 70, 0.5);
+  border-radius: 50%;
+  animation: trolley-smoke 0.85s ease-out infinite;
+}
+
+@keyframes trolley-smoke {
+  0% {
+    opacity: 0.65;
+    transform: translateX(0) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-80%) scale(1.4);
+  }
+}
+
+/* Victims on right — upper = person, lower = robot */
+.trolley-victim {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -88%);
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+.trolley-person {
+  left: 91.25%;
+  top: 36%;
+}
+
+.trolley-robot {
+  left: 91.25%;
+  top: 62.5%;
+}
+
+.trolley-victim-tag {
+  margin: 2px 0 0;
+  padding: 2px 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+}
+
+/* Person figure */
+.trolley-figure--person {
+  position: relative;
+  width: 26px;
+  height: 40px;
+}
+
+.trolley-figure--person .fig-head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  background: #ffcc80;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+}
+
+.trolley-figure--person .fig-body {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 16px;
+  height: 14px;
+  margin-left: -8px;
+  background: #1565c0;
+  border: 2px solid #1a1a1a;
+  border-radius: 2px;
+}
+
+.trolley-figure--person .fig-leg {
+  position: absolute;
+  bottom: 0;
+  width: 7px;
+  height: 14px;
+  background: #37474f;
+  border: 2px solid #1a1a1a;
+  border-radius: 0 0 2px 2px;
+}
+
+.trolley-figure--person .fig-leg--l {
+  left: 4px;
+}
+
+.trolley-figure--person .fig-leg--r {
+  right: 4px;
+}
+
+/* Robot figure */
+.trolley-figure--robot {
+  position: relative;
+  width: 28px;
+  height: 40px;
+}
+
+.trolley-figure--robot .fig-head {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 20px;
+  height: 12px;
+  margin-left: -10px;
+  background: #9e9e9e;
+  border: 2px solid #1a1a1a;
+  border-radius: 3px;
+}
+
+.trolley-figure--robot .fig-eye {
+  position: absolute;
+  top: 3px;
+  width: 4px;
+  height: 4px;
+  background: #00e5ff;
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 0 3px #00e5ff;
+}
+
+.trolley-figure--robot .fig-eye--l {
+  left: 3px;
+}
+
+.trolley-figure--robot .fig-eye--r {
+  right: 3px;
+}
+
+.trolley-figure--robot .fig-body {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 22px;
+  height: 16px;
+  margin-left: -11px;
+  background: #757575;
+  border: 2px solid #1a1a1a;
+  border-radius: 2px;
+}
+
+.trolley-figure--robot .fig-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 20px;
+  height: 7px;
+  margin-left: -10px;
+  background: #424242;
+  border: 2px solid #1a1a1a;
+  border-radius: 2px;
+}
+
+.trolley-victim.is-dead {
+  opacity: 0.4;
+  filter: grayscale(1);
+  transform: translate(-50%, -75%) rotate(-12deg);
+}
+
+.trolley-victim.is-safe {
+  animation: victim-relief 0.55s ease;
+}
+
+@keyframes victim-relief {
+  0%,
+  100% {
+    transform: translate(-50%, -88%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -92%) scale(1.06);
+  }
+}
+
+/* Lever — directly under trolley start (left) */
+.trolley-lever-assembly {
+  position: absolute;
+  left: 12.5%;
+  top: 54%;
+  transform: translateX(-50%);
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  touch-action: none;
+}
+
+.trolley-lever-base {
+  width: 28px;
+  height: 8px;
+  background: #5d4037;
+  border: 2px solid #1a1a1a;
+  border-radius: 2px;
+}
+
+.trolley-lever-arm {
+  position: relative;
+  width: 5px;
+  height: 50px;
+  margin-top: -2px;
+  transform-origin: bottom center;
+  transform: rotate(-6deg);
+  transition: transform 0.08s ease-out;
+  cursor: grab;
+  background: #1a1a1a;
+  border-radius: 2px;
+}
+
+.trolley-lever-arm:active {
+  cursor: grabbing;
+}
+
+.trolley-scene.is-lever-dragging .trolley-lever-arm {
+  transition: none;
+}
+
+/* Ball on top — classic lever look */
+.trolley-lever-knob {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  background: #1a1a1a;
+  border: 2px solid #1a1a1a;
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 0 rgba(255, 255, 255, 0.15);
+}
+
+.trolley-lever-label {
+  margin-top: 4px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.trolley-status {
+  margin: 12px 0 0;
+  min-height: 1.4em;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.trolley-status.is-urgent {
+  color: #d93025;
+  animation: urgent-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes urgent-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}

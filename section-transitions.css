@@ -1,0 +1,202 @@
+/* Section transitions — slide out, briefing card, dock strip, slide in */
+
+.stg-slide-exit {
+  animation: stg-slide-out-right 0.48s cubic-bezier(0.45, 0, 0.75, 0.2) forwards;
+  pointer-events: none;
+}
+
+.stg-slide-enter {
+  animation: stg-slide-in-left 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes stg-slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(108%);
+  }
+}
+
+@keyframes stg-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-108%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.gate.is-transitioning .gate-title,
+.gate.is-transitioning .gate-sub {
+  opacity: 0;
+  pointer-events: none;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.25s ease,
+    max-height 0.35s ease,
+    margin 0.35s ease;
+}
+
+.gate.is-briefing-card .gate-title,
+.gate.is-briefing-card .gate-sub {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.section-briefing {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 12px;
+  padding: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  pointer-events: none;
+  transition: none;
+}
+
+.section-briefing.hidden {
+  display: none !important;
+}
+
+.section-briefing.is-reveal {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition:
+    opacity 0.38s cubic-bezier(0.2, 0.9, 0.3, 1),
+    transform 0.42s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.section-briefing.is-docking {
+  pointer-events: none;
+  animation: stg-briefing-dock 0.52s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.section-briefing.is-docked {
+  display: block;
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+  margin-bottom: 8px;
+  padding: 8px 12px 10px;
+  background: #fff;
+  border: 2px solid #dadce0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.2);
+}
+
+@keyframes stg-briefing-dock {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+.section-briefing-recaptcha {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-left: 3px solid #4285f4;
+  border-radius: 2px;
+}
+
+.section-briefing-recaptcha-badge {
+  flex-shrink: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5f6368;
+}
+
+.section-briefing-reason {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #3c4043;
+}
+
+.section-briefing.is-docked .section-briefing-recaptcha {
+  margin-bottom: 6px;
+  padding: 6px 8px;
+}
+
+.section-briefing.is-docked .section-briefing-reason {
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.section-briefing-name {
+  margin: 0 0 6px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #202124;
+  letter-spacing: 0.02em;
+}
+
+.section-briefing.is-docked .section-briefing-name {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.section-briefing-desc {
+  margin: 0 0 16px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #5f6368;
+}
+
+.section-briefing.is-docked .section-briefing-desc,
+.section-briefing.is-docked .section-briefing-next {
+  display: none;
+}
+
+.gate:has(.section-briefing.is-docked) .gate-title {
+  display: none;
+}
+
+.section-briefing-next {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  background: #4285f4;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.35);
+  transition: background 0.15s ease;
+}
+
+.section-briefing-next:hover {
+  background: #3367d6;
+}
+
+.win-screen.stg-slide-enter {
+  animation: stg-slide-in-left 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}

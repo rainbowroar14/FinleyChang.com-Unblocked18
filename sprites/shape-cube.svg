@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="crispEdges">
+  <rect width="64" height="64" fill="none"/>
+  <!-- top face (lit) -->
+  <path d="M12 28 L32 16 L52 28 L32 40 Z" fill="#ff6b5a" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M16 30 L32 20 L44 30 L32 36 Z" fill="#ff8a7a"/>
+  <!-- left face -->
+  <path d="M12 28 L12 48 L32 56 L32 40 Z" fill="#c43030" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M14 32 L14 46 L30 52 L30 38 Z" fill="#a82828"/>
+  <!-- right face -->
+  <path d="M32 40 L52 28 L52 48 L32 56 Z" fill="#8b2020" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M34 42 L50 32 L50 46 L34 52 Z" fill="#701818"/>
+  <!-- highlight stripe on top -->
+  <rect x="24" y="22" width="6" height="2" fill="#ffc4bc" transform="rotate(-26 27 23)"/>
+</svg>

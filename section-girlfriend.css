@@ -1,0 +1,247 @@
+/* Section 5 — convince ARIA */
+.section-girlfriend {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.section-girlfriend.hidden {
+  display: none !important;
+}
+
+.gf-panel {
+  width: 100%;
+  max-width: 380px;
+  max-height: min(78vh, 640px);
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f7;
+  border: 2px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.gf-header {
+  flex-shrink: 0;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, #ff6b9d 0%, #c2185b 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.gf-header-title {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.gf-header-sub {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  opacity: 0.95;
+}
+
+.gf-jet-scene {
+  flex-shrink: 0;
+  position: relative;
+  height: 72px;
+  background: linear-gradient(180deg, #87ceeb 0%, #5a9e4a 100%);
+  border-bottom: 2px solid #1a1a1a;
+  transition: filter 0.5s ease;
+}
+
+.gf-jet-scene.is-parked {
+  filter: saturate(0.7) brightness(0.95);
+}
+
+.gf-jet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 36px;
+  margin: -18px 0 0 -60px;
+  background: linear-gradient(180deg, #78909c, #455a64);
+  border: 2px solid #1a1a1a;
+  border-radius: 4px 16px 4px 4px;
+  transition: transform 0.6s cubic-bezier(0.3, 0.9, 0.4, 1.1);
+}
+
+.gf-jet-scene.is-parked .gf-jet {
+  transform: translateY(18px) rotate(-4deg);
+}
+
+.gf-jet::before {
+  content: "";
+  position: absolute;
+  right: -14px;
+  top: 8px;
+  width: 16px;
+  height: 18px;
+  background: #37474f;
+  border: 2px solid #1a1a1a;
+  border-radius: 0 8px 8px 0;
+}
+
+.gf-nuke-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.35rem;
+  color: #ffeb3b;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid #1a1a1a;
+  border-radius: 3px;
+  transition: opacity 0.4s ease;
+}
+
+.gf-jet-scene.is-parked .gf-nuke-badge {
+  opacity: 0;
+}
+
+.gf-chat-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px 10px;
+}
+
+.gf-thread {
+  flex: 1;
+  min-height: 80px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 4px 2px;
+  margin-bottom: 8px;
+}
+
+.gf-thread .chat-row--aria .chat-bubble {
+  background: linear-gradient(135deg, #ff6b9d, #e91e63);
+  color: #fff;
+  border-bottom-left-radius: 4px;
+}
+
+.gf-prompt {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5f6368;
+  text-align: center;
+}
+
+.gf-prompt.is-error {
+  color: #d93025;
+}
+
+.gf-sentence-wrap {
+  flex-shrink: 0;
+  min-height: 2.4em;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 2px dashed #9aa0a6;
+  border-radius: 8px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #1a1a1a;
+}
+
+.gf-sentence-wrap.is-empty::before {
+  content: "Tap words to build your sentence…";
+  color: #9aa0a6;
+  font-style: italic;
+}
+
+.gf-sentence-word {
+  display: inline;
+  padding: 0 1px;
+}
+
+.gf-sentence-word::after {
+  content: " ";
+}
+
+.gf-word-bank {
+  flex: 1;
+  min-height: 100px;
+  max-height: 160px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-content: flex-start;
+  padding: 4px;
+  background: #e8e8ed;
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+}
+
+.gf-word-chip {
+  padding: 4px 8px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #1a1a1a;
+  transition: transform 0.06s ease, background 0.1s ease;
+}
+
+.gf-word-chip:hover {
+  background: #ffe0f0;
+}
+
+.gf-word-chip:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #1a1a1a;
+}
+
+.gf-word-chip.is-win-word {
+  border-color: #2e7d32;
+  background: #e8f5e9;
+}
+
+.gf-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.gf-btn {
+  flex: 1;
+  padding: 10px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.gf-btn--clear {
+  background: #e0e0e0;
+  color: #1a1a1a;
+}
+
+.gf-btn--send {
+  background: #ff6b9d;
+  color: #fff;
+}
+
+.gf-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}

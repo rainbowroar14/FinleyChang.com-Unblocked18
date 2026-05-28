@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Not A Robot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rye&family=Libre+Baskerville:wght@400;700&family=Creepster&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pixel.css" />
+  <link rel="stylesheet" href="section-captcha.css" />
+  <link rel="stylesheet" href="trolley.css" />
+  <link rel="stylesheet" href="section-girlfriend.css" />
+  <link rel="stylesheet" href="section-lawnmower.css" />
+  <link rel="stylesheet" href="section-transitions.css" />
+</head>
+<body>
+  <main class="app">
+    <aside
+      class="system-power-panel hidden"
+      id="system-power-panel"
+      aria-hidden="true"
+      aria-label="System power"
+    >
+      <div class="progress-header">
+        <span class="progress-label">Power required</span>
+        <span class="progress-percent" id="system-power-percent">0%</span>
+      </div>
+      <div
+        class="progress-track system-power-track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        id="system-power-track"
+      >
+        <div class="progress-fill system-power-fill" id="system-power-fill"></div>
+      </div>
+      <p class="system-power-rate" id="system-power-rate">Complete levels to generate power</p>
+    </aside>
+
+    <section id="gate" class="gate">
+      <h1 class="gate-title" id="gate-title">Prove you are human</h1>
+      <p class="gate-sub" id="gate-sub">This is a simple 6 level fun im not a robot game I made.</p>
+      <div id="start-panel" class="start-panel">
+        <p class="start-panel-text">This is a simple 6 level fun im not a robot game I made.</p>
+        <button type="button" class="start-panel-btn" id="start-game-btn">Start</button>
+      </div>
+
+      <div
+        id="section-briefing"
+        class="section-briefing hidden"
+        aria-hidden="true"
+        role="region"
+        aria-labelledby="section-briefing-name"
+      >
+        <div class="section-briefing-recaptcha">
+          <span class="section-briefing-recaptcha-badge">reCAPTCHA</span>
+          <p class="section-briefing-reason" id="section-briefing-reason"></p>
+        </div>
+        <h2 class="section-briefing-name" id="section-briefing-name"></h2>
+        <p class="section-briefing-desc" id="section-briefing-desc"></p>
+        <button type="button" class="section-briefing-next" id="section-briefing-next">Next</button>
+      </div>
+
+      <div class="verification-flow">
+      <div class="flow-node hidden" id="flow-node-captcha">
+      <div class="g-recaptcha" id="recaptcha-widget" role="presentation">
+        <div class="recaptcha-checkbox-wrap">
+          <button
+            type="button"
+            class="recaptcha-checkbox-anchor"
+            id="recaptcha-checkbox"
+            aria-checked="false"
+            aria-labelledby="recaptcha-label"
+            disabled
+          >
+            <span class="recaptcha-checkbox-border" aria-hidden="true">
+              <span class="recaptcha-checkbox-borderAnimation"></span>
+              <span class="recaptcha-checkbox-spinner" aria-hidden="true">
+                <svg class="recaptcha-spinner-svg" viewBox="0 0 50 50" aria-hidden="true">
+                  <circle class="recaptcha-spinner-arc arc-blue" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                  <circle class="recaptcha-spinner-arc arc-red" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                  <circle class="recaptcha-spinner-arc arc-yellow" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                  <circle class="recaptcha-spinner-arc arc-green" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                </svg>
+              </span>
+              <span class="recaptcha-checkbox-checkmark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <label id="recaptcha-label" class="recaptcha-checkbox-label" for="recaptcha-checkbox">
+            I'm not a robot
+          </label>
+        </div>
+
+        <div class="recaptcha-branding">
+          <div class="recaptcha-logo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="32" height="32">
+              <path fill="#1c3aa9" d="M32 6c-8 0-15 4-19 10v12h19V6z"/>
+              <path fill="#4285f4" d="M13 16C8 22 6 30 8 38l11-7V16z"/>
+              <path fill="#ababab" d="M32 58c8 0 15-4 19-10V36H32v22z"/>
+              <path fill="#9b9b9b" d="M51 48c5-6 7-14 5-22l-11 7v15z"/>
+            </svg>
+          </div>
+          <div class="recaptcha-terms">
+            <span>reCAPTCHA</span>
+            <span class="recaptcha-terms-links">
+              <a href="#" tabindex="-1" onclick="return false">Privacy</a>
+              <span> - </span>
+              <a href="#" tabindex="-1" onclick="return false">Terms</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div id="section-1" class="game-section section-power hidden" aria-hidden="true">
+        <p class="section-tag">Section 1 — Power</p>
+
+      <div class="power-pipe" id="pipe-captcha-2" aria-hidden="true">
+        <div class="pipe-flange pipe-flange-top"></div>
+        <div class="pipe-shaft">
+          <div class="pipe-metal"></div>
+          <div class="pipe-electricity"></div>
+          <div class="pipe-electricity pipe-electricity-2"></div>
+        </div>
+        <div class="pipe-flange pipe-flange-bottom"></div>
+      </div>
+
+      <div class="levels-stack" id="power-levels-stack">
+      <div id="level-3" class="flow-node level-panel level-pump" aria-hidden="true">
+        <p class="level-badge">Pump</p>
+        <p class="level-hint pixel-hint">Pump to finish verification</p>
+
+        <div class="progress-panel">
+          <div class="progress-header">
+            <span class="progress-label">Verification load</span>
+            <span class="progress-percent" id="progress-percent">0%</span>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="progress-track"
+          >
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <button type="button" class="pump-btn" id="pump-btn" aria-label="Pump">
+          <span class="pump-visual" aria-hidden="true">
+            <span class="pump-rod"></span>
+            <span class="pump-handle"></span>
+            <span class="pump-base"></span>
+          </span>
+          <span class="pump-label">PUMP</span>
+        </button>
+      </div>
+
+      <div class="power-pipe" id="pipe-level3-4" aria-hidden="true">
+        <div class="pipe-flange pipe-flange-top"></div>
+        <div class="pipe-shaft">
+          <div class="pipe-metal"></div>
+          <div class="pipe-electricity"></div>
+          <div class="pipe-electricity pipe-electricity-2"></div>
+        </div>
+        <div class="pipe-flange pipe-flange-bottom"></div>
+      </div>
+
+      <div id="level-4" class="flow-node level-panel level-wheel rustic-panel" aria-hidden="true">
+        <p class="level-badge rustic-badge">Iron Wheel</p>
+        <p class="level-hint rustic-hint">Hold 90–100 MPH steady to secure the wheel (+0.2%/sec passive when done).</p>
+
+        <div class="spinner-hud">
+          <div class="mph-readout rustic-gauge" id="mph-readout">
+            <span class="mph-value" id="mph-value">0</span>
+            <span class="mph-unit">MPH</span>
+          </div>
+          <p class="mph-target" id="mph-target">Hold steady: 90–100 MPH</p>
+        </div>
+
+        <div class="progress-panel spinner-progress rustic-progress">
+          <div class="progress-header">
+            <span class="progress-label">Wheel secured</span>
+            <span class="progress-percent" id="spinner-progress-percent">0%</span>
+          </div>
+          <div
+            class="progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            id="spinner-progress-track"
+          >
+            <div class="progress-fill" id="spinner-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="spinner-stage" id="spinner-stage">
+          <div class="spinner-zone-ring" id="spinner-zone-ring" aria-hidden="true"></div>
+          <div class="spinner-wheel" id="spinner-wheel">
+            <div class="spinner-wheel-face" id="spinner-wheel-face">
+              <span class="spinner-spoke" aria-hidden="true"></span>
+              <span class="spinner-spoke" aria-hidden="true"></span>
+              <span class="spinner-spoke" aria-hidden="true"></span>
+              <span class="spinner-spoke" aria-hidden="true"></span>
+              <button type="button" class="spinner-grab" id="spinner-grab" aria-label="Grab wheel handle"></button>
+            </div>
+          </div>
+          <p class="spinner-status rustic-status" id="spinner-status">Put your shoulder into it!</p>
+        </div>
+      </div>
+
+      <div class="power-pipe" id="pipe-level4-5" aria-hidden="true">
+        <div class="pipe-flange pipe-flange-top"></div>
+        <div class="pipe-shaft">
+          <div class="pipe-metal"></div>
+          <div class="pipe-electricity"></div>
+          <div class="pipe-electricity pipe-electricity-2"></div>
+        </div>
+        <div class="pipe-flange pipe-flange-bottom"></div>
+      </div>
+
+      <div id="level-5" class="flow-node level-panel level-generator horror-panel" aria-hidden="true">
+        <p class="level-badge horror-badge">Generator</p>
+        <p class="level-hint level-4-hint">Passive +0.2%/sec while running. Click it only when it breaks to fix wires.</p>
+
+        <button type="button" class="generator-box horror-generator" id="generator-box" disabled aria-label="Generator">
+          <div class="horror-flicker" aria-hidden="true"></div>
+          <div class="generator-visual is-running" id="generator-visual" aria-hidden="true">
+            <span class="gen-coil"></span>
+            <span class="gen-coil coil-2"></span>
+            <span class="gen-core"></span>
+            <span class="gen-pulse" aria-hidden="true"></span>
+          </div>
+          <p class="generator-status" id="generator-status">It is running</p>
+          <p class="generator-uptime" id="generator-uptime">Feeding the dark: +0.2%/sec</p>
+        </button>
+
+        <div class="wire-task horror-wire-task hidden" id="wire-task" aria-hidden="true">
+          <p class="wire-task-title">Fix Wiring</p>
+          <p class="wire-task-hint" id="wire-task-hint">Click a wire, drag to the matching color on the other side.</p>
+          <div class="wire-board-wrap" id="wire-board-wrap">
+            <svg class="wire-lines-svg" id="wire-lines-svg" aria-hidden="true"></svg>
+            <div class="wire-board" id="wire-board"></div>
+          </div>
+          <p class="wire-progress" id="wire-progress">0 / 4 connected</p>
+        </div>
+      </div>
+
+      <div class="power-pipe" id="pipe-level5-6" aria-hidden="true">
+        <div class="pipe-flange pipe-flange-top"></div>
+        <div class="pipe-shaft">
+          <div class="pipe-metal"></div>
+          <div class="pipe-electricity"></div>
+          <div class="pipe-electricity pipe-electricity-2"></div>
+        </div>
+        <div class="pipe-flange pipe-flange-bottom"></div>
+      </div>
+
+      <div id="level-6" class="flow-node level-panel level-power retro-panel" aria-hidden="true">
+        <p class="level-badge retro-badge">Grid Power</p>
+        <p class="level-hint level-5-hint">Click POWER for +0.1% each time (watch the bar on the left).</p>
+        <div class="retro-power-wrap">
+          <button type="button" class="win95-power-btn" id="power-btn" aria-label="Click to feed power">
+            POWER
+          </button>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div id="section-2" class="game-section section-chat hidden" aria-hidden="true">
+        <div class="pixel-game section-chat-panel is-visible">
+          <header class="pixel-level-header chat-header">
+            <p class="pixel-header-line">Messages</p>
+            <p class="pixel-header-line pixel-header-line--bold">Mom</p>
+          </header>
+          <div class="chat-body">
+            <div class="chat-thread" id="chat-thread" role="log" aria-live="polite" aria-relevant="additions"></div>
+            <p class="chat-prompt hidden" id="chat-prompt" role="status" aria-live="polite"></p>
+            <div class="chat-replies hidden" id="chat-replies" role="group" aria-label="Your reply"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-3" class="game-section section-captcha hidden" aria-hidden="true">
+        <div class="section-captcha-inner">
+          <h2 class="section-captcha-title">I'm really not a robot</h2>
+          <p class="section-captcha-progress" id="s5-progress" aria-live="polite">0 / 10 verified</p>
+          <div class="g-recaptcha" id="s5-recaptcha-widget" role="presentation">
+            <div class="recaptcha-checkbox-wrap">
+              <button
+                type="button"
+                class="recaptcha-checkbox-anchor"
+                id="s5-recaptcha-checkbox"
+                aria-checked="false"
+                aria-labelledby="s5-recaptcha-label"
+              >
+                <span class="recaptcha-checkbox-border" aria-hidden="true">
+                  <span class="recaptcha-checkbox-borderAnimation"></span>
+                  <span class="recaptcha-checkbox-spinner" aria-hidden="true">
+                    <svg class="recaptcha-spinner-svg" viewBox="0 0 50 50" aria-hidden="true">
+                      <circle class="recaptcha-spinner-arc arc-blue" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                      <circle class="recaptcha-spinner-arc arc-red" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                      <circle class="recaptcha-spinner-arc arc-yellow" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                      <circle class="recaptcha-spinner-arc arc-green" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                    </svg>
+                  </span>
+                  <span class="recaptcha-checkbox-checkmark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <label id="s5-recaptcha-label" class="recaptcha-checkbox-label" for="s5-recaptcha-checkbox">
+                I'm not a robot
+              </label>
+            </div>
+            <div class="recaptcha-branding">
+              <div class="recaptcha-logo" aria-hidden="true">
+                <svg viewBox="0 0 64 64" width="32" height="32">
+                  <path fill="#1c3aa9" d="M32 6c-8 0-15 4-19 10v12h19V6z"/>
+                  <path fill="#4285f4" d="M13 16C8 22 6 30 8 38l11-7V16z"/>
+                  <path fill="#ababab" d="M32 58c8 0 15-4 19-10V36H32v22z"/>
+                  <path fill="#9b9b9b" d="M51 48c5-6 7-14 5-22l-11 7v15z"/>
+                </svg>
+              </div>
+              <div class="recaptcha-terms">
+                <span>reCAPTCHA</span>
+                <span class="recaptcha-terms-links">
+                  <a href="#" tabindex="-1" onclick="return false">Privacy</a>
+                  <span> - </span>
+                  <a href="#" tabindex="-1" onclick="return false">Terms</a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="captcha-challenge-next hidden" id="captcha-challenge-next" aria-label="Next">Next</button>
+
+      <div id="section-4" class="game-section section-trolley hidden" aria-hidden="true">
+        <div class="trolley-panel">
+          <h2 class="trolley-title">Section 4 — The Trolley</h2>
+          <p class="trolley-hint">The trolley rolls right. Switch tracks with the lever — you can pull back to save the person unless the trolley is already on the slope down to the robot.</p>
+          <div class="trolley-scene" id="trolley-scene" aria-label="Trolley dilemma scene">
+            <svg class="trolley-svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <rect class="trolley-ground" x="0" y="88" width="400" height="112" />
+              <!-- horizontal: left → fork → upper (person) / lower curve (robot) -->
+              <path class="trolley-rail" d="M 22 72 L 195 72" />
+              <path class="trolley-rail" d="M 195 72 L 375 72" />
+              <path class="trolley-rail" d="M 195 72 C 248 72 278 92 375 125" />
+              <path class="trolley-rail-inner" d="M 22 72 L 195 72" />
+              <path class="trolley-rail-inner" d="M 195 72 L 375 72" />
+              <path class="trolley-rail-inner" d="M 195 72 C 248 72 278 92 375 125" />
+              <line class="trolley-tie" x1="50" y1="64" x2="50" y2="80" />
+              <line class="trolley-tie" x1="85" y1="64" x2="85" y2="80" />
+              <line class="trolley-tie" x1="120" y1="64" x2="120" y2="80" />
+              <line class="trolley-tie" x1="155" y1="64" x2="155" y2="80" />
+              <line class="trolley-tie" x1="230" y1="64" x2="230" y2="80" />
+              <line class="trolley-tie" x1="280" y1="64" x2="280" y2="80" />
+              <line class="trolley-tie" x1="330" y1="64" x2="330" y2="80" />
+              <line class="trolley-tie" x1="250" y1="88" x2="268" y2="102" />
+              <line class="trolley-tie" x1="300" y1="108" x2="318" y2="118" />
+              <line class="trolley-tie" x1="345" y1="118" x2="360" y2="124" />
+            </svg>
+            <div class="trolley-layer">
+              <div class="trolley-switch" id="trolley-switch" aria-hidden="true"></div>
+              <div class="trolley-train-wrap" id="trolley-train">
+                <div class="trolley-train-inner">
+                  <div class="trolley-train-smoke"></div>
+                  <img
+                    class="trolley-sprite"
+                    id="trolley-sprite"
+                    src="sprites/trolley.png"
+                    width="120"
+                    height="48"
+                    alt=""
+                    draggable="false"
+                  />
+                </div>
+              </div>
+              <div class="trolley-victim trolley-person" id="trolley-person">
+                <div class="trolley-figure trolley-figure--person" aria-hidden="true">
+                  <span class="fig-head"></span>
+                  <span class="fig-body"></span>
+                  <span class="fig-leg fig-leg--l"></span>
+                  <span class="fig-leg fig-leg--r"></span>
+                </div>
+                <span class="trolley-victim-tag">Person</span>
+              </div>
+              <div class="trolley-victim trolley-robot" id="trolley-robot">
+                <div class="trolley-figure trolley-figure--robot" aria-hidden="true">
+                  <span class="fig-head">
+                    <span class="fig-eye fig-eye--l"></span>
+                    <span class="fig-eye fig-eye--r"></span>
+                  </span>
+                  <span class="fig-body"></span>
+                  <span class="fig-base"></span>
+                </div>
+                <span class="trolley-victim-tag">Robot</span>
+              </div>
+            </div>
+            <div class="trolley-layer trolley-layer--interactive">
+              <div class="trolley-lever-assembly" id="trolley-lever-assembly">
+                <div class="trolley-lever-base"></div>
+                <div class="trolley-lever-arm" id="trolley-lever-arm" role="slider" aria-label="Pull lever" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                  <span class="trolley-lever-knob"></span>
+                </div>
+                <span class="trolley-lever-label">Pull lever</span>
+              </div>
+            </div>
+          </div>
+          <p class="trolley-status" id="trolley-status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div id="section-5" class="game-section section-girlfriend hidden" aria-hidden="true">
+        <div class="gf-panel" id="gf-panel">
+          <header class="gf-header">
+            <h2 class="gf-header-title">Section 5 — ARIA</h2>
+            <p class="gf-header-sub">Convince ARIA to stand down — you can keep chatting after she does</p>
+          </header>
+          <div class="gf-jet-scene" id="gf-jet-scene" aria-hidden="true">
+            <div class="gf-jet"></div>
+            <span class="gf-nuke-badge">F-1 · Little Boys armed</span>
+          </div>
+          <div class="gf-chat-body">
+            <div class="gf-thread" id="gf-thread" role="log" aria-live="polite"></div>
+            <p class="gf-prompt" id="gf-prompt">Pick words, then Send.</p>
+            <div class="gf-sentence-wrap is-empty" id="gf-sentence-wrap" aria-live="polite">
+              <span id="gf-sentence"></span>
+            </div>
+            <div class="gf-word-bank" id="gf-word-bank" role="group" aria-label="Word bank"></div>
+            <div class="gf-actions">
+              <button type="button" class="gf-btn gf-btn--clear" id="gf-clear">Clear</button>
+              <button type="button" class="gf-btn gf-btn--send" id="gf-send">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-6" class="game-section section-lawn hidden" aria-hidden="true">
+        <div class="lawn-panel">
+          <div class="lawn-scene-wrap" id="lawn-scene-wrap">
+            <canvas class="lawn-canvas" id="lawn-canvas" aria-label="Pull starter rope on lawn mower"></canvas>
+            <div class="lawn-hud">
+              <p class="lawn-status" id="lawn-status">Pulls: 0 / 5</p>
+              <div class="lawn-pull-meter" aria-hidden="true">
+                <div class="lawn-pull-meter-fill" id="lawn-pull-meter-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <section id="lose-screen" class="lose-screen hidden" aria-hidden="true">
+      <h1 class="lose-title" id="lose-title">You're a robot!</h1>
+      <p class="lose-message" id="lose-message">You checked a trap phrase. Mom is disappointed.</p>
+      <button type="button" class="lose-retry" id="lose-retry">Try this section again</button>
+    </section>
+
+    <div id="level-picker" class="level-picker hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="level-picker-title">
+      <button type="button" class="level-picker-backdrop" id="level-picker-backdrop" aria-label="Close level menu"></button>
+      <div class="level-picker-panel">
+        <h2 class="level-picker-title" id="level-picker-title">Jump to level</h2>
+        <p class="level-picker-hint">Press <kbd>]</kbd> or Escape to close</p>
+        <ul class="level-picker-list">
+          <li><button type="button" class="level-picker-btn" data-level="intro">Intro — Checkbox</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section1">Section 1 — Power</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section2">Section 2 — Mom chat</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section3">Section 3 — Captcha</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section4">Section 4 — Trolley</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section5">Section 5 — ARIA</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="section6">Section 6 — Lawn mower</button></li>
+          <li><button type="button" class="level-picker-btn" data-level="win">Win screen</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <section id="win-screen" class="win-screen hidden" aria-hidden="true">
+      <div class="win-confetti" aria-hidden="true"></div>
+      <p class="win-level" id="win-level">Level 1</p>
+      <h1 class="win-title" id="win-title">You Win!</h1>
+      <p class="win-tagline" id="win-tagline">Certified Not A Robot</p>
+      <p class="win-message" id="win-message">Verification passed. Humanity confirmed.</p>
+      <button type="button" class="win-replay" id="play-again">Play again</button>
+    </section>
+  </main>
+  <script src="pixel-art-engine.js"></script>
+  <script src="pixel-sprites-data.js"></script>
+  <script src="captcha-phrases.js"></script>
+  <script src="girlfriend-words.js"></script>
+  <script src="lawn-mower.js"></script>
+  <script src="sounds.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

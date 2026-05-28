@@ -1,0 +1,150 @@
+/* Section 6 — fullscreen lawn mower */
+.app.app--lawn {
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+}
+
+.app.app--lawn .system-power-panel {
+  z-index: 20;
+}
+
+.gate.gate--lawn {
+  max-width: none;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.gate.gate--lawn > .gate-title,
+.gate.gate--lawn > .gate-sub {
+  display: none;
+}
+
+.gate.gate--lawn .verification-flow {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.section-lawn {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.section-lawn.hidden {
+  display: none !important;
+}
+
+.lawn-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lawn-title,
+.lawn-hint {
+  display: none;
+}
+
+.lawn-scene-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  background: #3d8b3d;
+  box-shadow: none;
+}
+
+.lawn-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: unset;
+  touch-action: none;
+  cursor: default;
+}
+
+.lawn-canvas.is-grabbing {
+  cursor: grabbing;
+}
+
+.lawn-hud {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  padding: 28px 16px max(16px, env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.45) 55%);
+  pointer-events: none;
+}
+
+.lawn-hud .lawn-status,
+.lawn-hud .lawn-pull-meter {
+  pointer-events: auto;
+}
+
+.lawn-scene-wrap.is-running {
+  animation: mower-rumble 0.35s ease-in-out;
+}
+
+@keyframes mower-rumble {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.lawn-status {
+  margin: 0 0 8px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.lawn-status.is-done {
+  color: #c8e6c9;
+}
+
+.lawn-pull-meter {
+  margin: 0 auto;
+  width: min(90vw, 420px);
+  max-width: 420px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.lawn-pull-meter-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #81c784, #43a047);
+  transition: width 0.25s ease;
+}

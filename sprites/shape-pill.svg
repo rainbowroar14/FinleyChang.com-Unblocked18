@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" shape-rendering="crispEdges">
+  <rect width="64" height="64" fill="none"/>
+  <!-- rounded block top -->
+  <rect x="14" y="22" width="36" height="14" rx="0" fill="#ff6b5a" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="16" y="24" width="14" height="8" fill="#ff9a8a"/>
+  <rect x="34" y="26" width="12" height="6" fill="#e85548"/>
+  <!-- front -->
+  <rect x="14" y="34" width="36" height="18" fill="#c43030" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="16" y="38" width="10" height="10" fill="#a82828"/>
+  <!-- right -->
+  <rect x="46" y="34" width="8" height="18" fill="#8b2020" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- cap rounds (pixel) -->
+  <rect x="12" y="24" width="4" height="8" fill="#ff6b5a" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="48" y="24" width="4" height="8" fill="#c43030" stroke="#1a1a1a" stroke-width="1"/>
+</svg>
